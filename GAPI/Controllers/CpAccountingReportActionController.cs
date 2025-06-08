@@ -15,7 +15,7 @@ using Microsoft.Extensions.Logging;
 using System.IO;
 using Microsoft.AspNetCore.Hosting;
 using GAPI.Common;
-using System.Net.Mail;  
+using System.Net.Mail;
 
 namespace GAPI.Controllers
 {
@@ -34,7 +34,7 @@ namespace GAPI.Controllers
         [HttpGet]
         [Authorize]
         [ActionName("GetList")]
-        public APIResult GetList(string condition, int page, int start, int limit, [FromQuery]string sort)
+        public APIResult GetList(string condition, int page, int start, int limit, [FromQuery] string sort)
         {
             try
             {
@@ -48,7 +48,7 @@ namespace GAPI.Controllers
                 }
                 CpAccountingReport.GetList(hsCondition, ref result);
 
-                  result.Success = true;
+                result.Success = true;
             }
             catch (Exception ex)
             {
@@ -64,7 +64,7 @@ namespace GAPI.Controllers
         [HttpGet]
         [Authorize]
         [ActionName("GetCpAccountingReport")]
-        public APIResult GetCpAccountingReport(string condition, int page, int start, int limit, [FromQuery]string sort)
+        public APIResult GetCpAccountingReport(string condition, int page, int start, int limit, [FromQuery] string sort)
         {
             try
             {
@@ -92,9 +92,9 @@ namespace GAPI.Controllers
         }
 
         [HttpPost]
-       // [Authorize]
+        // [Authorize]
         [ActionName("Save")]
-        public APIResult Save([FromBody]string value)
+        public APIResult Save([FromBody] string value)
         {
             try
             {
@@ -121,34 +121,37 @@ namespace GAPI.Controllers
                     foreach (var item in cp_accounting_report)
                     {
                         AddDefaultParams(item);
-                        
-                        
+
+
 
                         if (item["total_pay_price"] != null && item["total_pay_price"].ToString() != "")
                         {
-                            settlement_amt += decimal.Parse(item["total_pay_price"].ToString());;
+                            settlement_amt += decimal.Parse(item["total_pay_price"].ToString()); ;
                         }
 
                         if (item["settlement_date"] != null && item["settlement_date"].ToString() != "")
                         {
                             settlement_month = item["settlement_date"].ToString();
                         }
-                        
-                        if(item["movie_name"].ToString() == "선급이월액"){
+
+                        if (item["movie_name"].ToString() == "선급이월액")
+                        {
                             //Console.WriteLine("1  "+item["movie_name"]);
                             item["cp_pre_pay_no"] = nid;
-                            
+
                             item["settlement_amt"] = settlement_amt;
                             item["settlement_month"] = settlement_month;
                             item["prepay_date"] = DateTime.Now.ToString("yyyy-M-d");
 
                             iid += new CpPrePay().CpPrePayConfirm(item);// CpAccountingReport().Insert(item);
-                        }else{
-                            Console.WriteLine("21  "+item["movie_name"]);
-                            
+                        }
+                        else
+                        {
+                            Console.WriteLine("21  " + item["movie_name"]);
+
                             id += new CpAccountingReport().Insert(item);
                             // await _context.SaveChangesAsync(); // Doesn't work
-                            
+
                         }
 
                     }
@@ -170,7 +173,7 @@ namespace GAPI.Controllers
         [HttpPost]
         [Authorize]
         [ActionName("Cancel")]
-        public APIResult Cancel([FromBody]string value)
+        public APIResult Cancel([FromBody] string value)
         {
             try
             {
@@ -197,9 +200,9 @@ namespace GAPI.Controllers
         }
 
         [HttpPost]
-       // [Authorize]
+        // [Authorize]
         [ActionName("MailSend")]
-        public APIResult MailSend([FromBody]string value)
+        public APIResult MailSend([FromBody] string value)
         {
             try
             {
@@ -209,9 +212,9 @@ namespace GAPI.Controllers
                 //     hsCondition = JsonConvert.DeserializeObject<Hashtable>(value);
                 // }
                 var reportsFolder = "reports";
-                var attachfileName="";
+                var attachfileName = "";
                 var DB = Config.GetDatabase();
-                string rvalue =  value.Replace("\\n", "\n").Replace("\\r", "\r").Replace("\\t", "\t");
+                string rvalue = value.Replace("\\n", "\n").Replace("\\r", "\r").Replace("\\t", "\t");
 
                 var hsCondition = new Hashtable();
                 if (!string.IsNullOrWhiteSpace(rvalue))
@@ -220,53 +223,54 @@ namespace GAPI.Controllers
                 }
                 //ReplaceEscapeChar
 
-                
-                MailMessage mail = new MailMessage();
-            
-                SmtpClient SmtpServer = new SmtpClient("smtp.gmail.com");                    //set the address  tax_email       
-                mail.From = new MailAddress("soyeon@nkcontents.co.kr");                  
+
+                MailMessage mail = new MailMessage();
+
+                SmtpClient SmtpServer = new SmtpClient("smtp.gmail.com");                    //set the address  tax_email       
+
+                mail.From = new MailAddress("soyeon@nkcontents.co.kr");
                 mail.To.Add(hsCondition["to_email"].ToString());                    //set the contents            soyeon@nkcontents.co.kr       
 
                 if (hsCondition["cc_email"] != null && DBUtils.DataToString(hsCondition["cc_email"]) != "")
                 {
-                    string[] CCId = hsCondition["cc_email"].ToString().Split(',');  
-                    foreach (string CCEmail in CCId)  
-                    {  
+                    string[] CCId = hsCondition["cc_email"].ToString().Split(',');
+                    foreach (string CCEmail in CCId)
+                    {
                         mail.CC.Add(new MailAddress(CCEmail)); //Adding Multiple CC email Id  
-                    }  
+                    }
                 }
 
-               // mail.CC.Add("whchang@gen-one.com");
+                // mail.CC.Add("whchang@gen-one.com");
 
 
-                mail.Subject =hsCondition["mail_title"].ToString();//"Subject Test Mail";                  
-                mail.Body = System.Net.WebUtility.HtmlDecode(hsCondition["remark"].ToString());
-                
-                mail.IsBodyHtml = true;             
-                mail.BodyEncoding = System.Text.Encoding.UTF8;                  
-                mail.SubjectEncoding = System.Text.Encoding.UTF8;                    //set attachment                  
-                System.Net.Mail.Attachment attachment;      
-                            
-               // attachment = new System.Net.Mail.Attachment("C:\\nk-contents\\GAPI\\wwwroot\\reports\\"+hsCondition["excelname"].ToString()+".xlsx");   
-                attachfileName = hsCondition["excelname"].ToString()+".xlsx";  
+                mail.Subject = hsCondition["mail_title"].ToString();//"Subject Test Mail";                  
+                mail.Body = System.Net.WebUtility.HtmlDecode(hsCondition["remark"].ToString());
+
+                mail.IsBodyHtml = true;
+                mail.BodyEncoding = System.Text.Encoding.UTF8;
+                mail.SubjectEncoding = System.Text.Encoding.UTF8;                    //set attachment                  
+                System.Net.Mail.Attachment attachment;
+
+                // attachment = new System.Net.Mail.Attachment("C:\\nk-contents\\GAPI\\wwwroot\\reports\\"+hsCondition["excelname"].ToString()+".xlsx");   
+                attachfileName = hsCondition["excelname"].ToString() + ".xlsx";
                 var finfo = new FileInfo(Path.Combine(_hostingEnvironment.WebRootPath, reportsFolder, attachfileName));
-                
-                attachment = new System.Net.Mail.Attachment(finfo.ToString());          
+
+                attachment = new System.Net.Mail.Attachment(finfo.ToString());
                 mail.Attachments.Add(attachment);                    //setting smtpServer                  
-                SmtpServer.Port = 587;                  
-                SmtpServer.Credentials = new System.Net.NetworkCredential("nkcontents.vod@gmail.com", "dszp egcv qlgx fmej");                  
-                SmtpServer.EnableSsl = true;                    //SmtpServer.Send(mail);                  // MessageBox.Show("mail Send"); tfrr npso dvgl wtib   dszp egcv qlgx fmej                //async send mail                  
+                SmtpServer.Port = 587;
+                SmtpServer.Credentials = new System.Net.NetworkCredential("nkcontents.vod@gmail.com", "dszp egcv qlgx fmej");
+                SmtpServer.EnableSsl = true;                    //SmtpServer.Send(mail);                  // MessageBox.Show("mail Send"); tfrr npso dvgl wtib   dszp egcv qlgx fmej                //async send mail                  
                 SmtpServer.Send(mail);
-                
-    
+
+
                 var nid = DB.GetNextSeq("mail_send_log");
-                
+
                 hsCondition["mail_send_log_no"] = nid;
                 hsCondition["attach_file"] = attachfileName;
                 Decimal iid = new CpPrePay().MailSendLog(hsCondition);
 
 
-                result.NewID = iid;         
+                result.NewID = iid;
             }
             catch (Exception ex)
             {
@@ -276,7 +280,7 @@ namespace GAPI.Controllers
                 result.Errors.Add(new Error("EX", ex.ToString()));
             }
 
-            return result;      
+            return result;
         }
 
 
