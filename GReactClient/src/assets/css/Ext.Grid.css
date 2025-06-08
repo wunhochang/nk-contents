@@ -1,0 +1,97 @@
+.x-column-header {
+    border-right: 1px solid #d0d0d0;
+    color: #404040;
+    font: 400 13px/19px 'Open Sans', 'Helvetica Neue', helvetica, arial, verdana, sans-serif;
+    outline: 0;
+    background-color: #F5F5F5;
+}
+
+.grid-edit-task {
+    width: 17px!important;
+    height: 17px!important;
+    background-image: url(/assets/images/btn_editor.png) !important;
+    background-color: transparent;
+    border: none;
+    border-color: transparent;
+    text-align: left;
+}
+
+.x-grid-inner-locked {
+    border-right-color: blue;
+    /*border-color: #ff0000; red color*/
+}
+.x-grid-locked .x-grid-inner-locked {
+    border-width: 0 1px 0 0;
+    border-style: solid;
+}
+.x-grid-scrollbar-clipper-locked,
+.x-grid-scrollbar-locked {
+    border-width: 0 1px 0 0;
+    border-style: solid;
+    border-right-color: blue;
+    /*border-color: #ff0000; red color*/
+}
+/*그리드 셀 클릭시 outline 없애기*/
+.x-grid-cell-inner-action-col :focus {
+  /*outline: 1px solid #5fa2dd;*/
+    outline: 1px solid rgba(95, 162, 221, 0);
+}
+/*그리드 셀 클릭시 outline 없애기*/
+.x-grid-item-focused .x-grid-cell-inner:before {
+    content: "";
+    position: absolute;
+    z-index: -1;
+    top: 0px;
+    right: 0px;
+    bottom: 0px;
+    left: 0px;
+    pointer-events: none;
+    /*border: 1px solid #5fa2dd;*/
+    border: 1px solid rgba(95, 162, 221, 0);
+}
+.x-grid-checkcolumn-cell-inner :focus {
+    /*outline: 1px solid #5fa2dd;*/
+    outline: 1px solid rgba(95, 162, 221, 0);
+}
+.x-grid-row-expander:focus {
+  /*outline: 1px solid #5fa2dd;*/
+  outline: 1px solid rgba(95, 162, 221, 0);
+}
+
+/*
+.x-grid-with-row-lines .x-grid-item.x-grid-item-selected {
+    border-style: solid;
+    border-color: #f2e3b2;
+}
+
+.x-grid-item-selected {
+    color: #404040;
+    background-color: #ffefbb;
+    //background-color: #ddebf9;
+
+}
+*/
+
+.grid-header-color-f86c6b{
+  background-color : rgba(248, 108, 107, 0.77);
+}
+
+.x-grid-row-summary .x-grid-cell{
+        background-color: #eaeff4 !important;
+        /*font-size: x-large !important;*/
+        font-weight: bold;
+}
+
+
+tr.grid-sum-node.x-grid-row {
+	background-color: #f2fdff;
+  font-weight: bold;
+}
+.x-grid-item-over tr.grid-sum-node.x-grid-row {
+	background-color: #eaeff4;
+  font-weight: bold;
+}
+.x-grid-item-selected tr.grid-sum-node.x-grid-row {
+	background-color: #ffefbb;
+  font-weight: bold;
+}

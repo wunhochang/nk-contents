@@ -1,0 +1,342 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
+using GAPI.Entity;
+using Newtonsoft.Json;
+using System.Collections;
+using System.Net;
+using Microsoft.AspNetCore.Authorization;
+using GAPI.Entity.Common;
+using Microsoft.Extensions.Logging;
+using System.IO;
+using Microsoft.AspNetCore.Hosting;
+using GAPI.Common;
+
+namespace GAPI.Controllers
+{
+    [Route("api/SpCorp/[action]")]
+    public class SpCorpActionController : GController
+    {
+        private const string XlsxContentType = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
+        private readonly IHostingEnvironment _hostingEnvironment;
+
+        private new APIResult result = new APIResult();
+        public SpCorpActionController(IHostingEnvironment hostingEnvironment)
+        {
+            _hostingEnvironment = hostingEnvironment;
+        }
+
+        [HttpGet]
+        [Authorize]
+        [ActionName("GetList")]
+        public APIResult GetList(string condition, int page, int start, int limit, [FromQuery]string sort)
+        {
+            try
+            {
+                CheckAuthNLogging(condition, "Get");
+
+                var hsCondition = new Hashtable();
+                /*검색조건 처리부분*/
+                if (!string.IsNullOrWhiteSpace(condition))
+                {
+                    hsCondition = JsonConvert.DeserializeObject<Hashtable>(condition);
+                }
+                /*리스트 정렬처리 부분*/
+                if (!string.IsNullOrWhiteSpace(sort))
+                {
+                    string ordby = string.Empty;
+                    List < Hashtable > hsOrderBy  = JsonConvert.DeserializeObject<List<Hashtable>>(sort);
+                    int loopcount = 0;
+                    foreach (Hashtable hs in hsOrderBy)
+                    {
+                        if(hs.ContainsKey("property") && hs.ContainsKey("direction"))
+                        {
+                            if (loopcount == 0)
+                            {
+                                ordby = " ORDER BY " + hs["property"].ToString() + " " + hs["direction"].ToString();
+                            }
+                            else
+                            {
+                                ordby = ordby + "," + hs["property"].ToString() + " " + hs["direction"].ToString();
+                            }
+                            loopcount++;
+                        }
+                    }
+                    hsCondition.Add("ordby", ordby);
+                }
+                else
+                {
+                    hsCondition.Add("ordby", " ORDER BY 1 DESC");
+                }
+                /*페이지관련 정보 처리부분*/
+                hsCondition.Add("page", page);
+                hsCondition.Add("start", start);
+                hsCondition.Add("limit", limit);
+
+                SpCorp.GetList(hsCondition, ref result);
+
+                result.Success = true;
+            }
+            catch (Exception ex)
+            {
+                if (Response.StatusCode == 200) Response.StatusCode = 500;
+
+                result.Success = false;
+                result.Errors.Add(new Error("EX", ex.ToString()));
+            }
+
+            return result;
+        }
+
+        [HttpGet]
+        //[Authorize]
+        [ActionName("GetComboList")]
+        public APIResult GetComboList([FromQuery]string condition)
+        {
+            try
+            {
+                //CheckAuthNLogging(condition, "Get");
+
+                var hsCondition = new Hashtable();
+                /*검색조건 처리부분*/
+                if (!string.IsNullOrWhiteSpace(condition))
+                {
+                    hsCondition = JsonConvert.DeserializeObject<Hashtable>(condition);
+                }
+                SpCorp.GetComboList(hsCondition, ref result);
+
+                result.Success = true;
+            }
+            catch (Exception ex)
+            {
+                if (Response.StatusCode == 200) Response.StatusCode = 500;
+
+                result.Success = false;
+                result.Errors.Add(new Error("EX", ex.ToString()));
+            }
+
+            return result;
+        }
+
+        [HttpGet]
+        //[Authorize]
+        [ActionName("GetReportComboList")]
+        public APIResult GetReportComboList([FromQuery]string condition)
+        {
+            try
+            {
+                //CheckAuthNLogging(condition, "Get");
+
+                var hsCondition = new Hashtable();
+                /*검색조건 처리부분*/
+                if (!string.IsNullOrWhiteSpace(condition))
+                {
+                    hsCondition = JsonConvert.DeserializeObject<Hashtable>(condition);
+                }
+                SpCorp.GetReportComboList(hsCondition, ref result);
+
+                result.Success = true;
+            }
+            catch (Exception ex)
+            {
+                if (Response.StatusCode == 200) Response.StatusCode = 500;
+
+                result.Success = false;
+                result.Errors.Add(new Error("EX", ex.ToString()));
+            }
+
+            return result;
+        }
+
+        [HttpPost]
+        [Authorize]
+        [ActionName("Save")]
+        public APIResult Save([FromBody]string value)
+        {
+            try
+            {
+                CheckAuthNLogging(value, "Post");
+
+                string jsonData = value;
+
+                Hashtable data = JsonConvert.DeserializeObject<Hashtable>(jsonData);
+
+                AddDefaultParams(data);
+                Decimal id = 0;
+                if (data["sp_corp_no"] == null
+                    || data["sp_corp_no"].ToString() == ""
+                    || data["sp_corp_no"].ToString() == "0")
+                {
+                    id = entity.Insert(data);
+                    //id = new CpCorp().Insert(data);
+                    if (data.ContainsKey("sp_corp_no"))
+                    {
+                        data["sp_corp_no"] = id;
+                    }
+                    else
+                    {
+                        data.Add("sp_corp_no", id);
+                    }
+                }
+                else
+                {
+                    id = entity.Update(data);
+                    //id = new CpCorp().Update(data);
+                }
+                if (data["detail_list"] != null && data["detail_list"].ToString() != "")
+                {
+                    List<Hashtable> detail_list = JsonConvert.DeserializeObject<List<Hashtable>>(data["detail_list"].ToString());
+                    foreach (var item in detail_list)
+                    {
+                        /*정산서 RAW 데이터 처리*/
+                        if (item.ContainsKey("sp_corp_no"))
+                        {
+                            item["sp_corp_no"] = data["sp_corp_no"].ToString();
+                        }
+                        else
+                        {
+                            item.Add("sp_corp_no", data["sp_corp_no"].ToString());
+                        }
+
+                        if (!item.ContainsKey("sp_corp_detail_no"))
+                        {
+                            item.Add("sp_corp_detail_no", "0");
+                        }
+                        Decimal iid = 0;
+                        if (item["sp_corp_detail_no"] == null
+                            || item["sp_corp_detail_no"].ToString() == ""
+                            || item["sp_corp_detail_no"].ToString() == "0")
+                        {
+                            iid = new SpCorpDetail().Insert(item);
+                            item["sp_corp_detail_no"] = iid;
+                        }
+                        else
+                        {
+                            iid = new SpCorpDetail().Update(item);
+                        }
+                        //이전 sale_kind 삭제
+                        bool bl = new SalesKind().Delete(item);
+                        if (item["sales_kind"] != null
+                            && item["sales_kind"].ToString() != "")
+                        {
+                            string sales_kind = item["sales_kind"].ToString();
+                            string[] words = sales_kind.Split(',');
+                            if (words.Length > 0)
+                            {
+                                foreach (string s in words)
+                                {
+                                    Hashtable salekind = new Hashtable();
+                                    salekind.Add("sp_corp_detail_no", item["sp_corp_detail_no"].ToString());
+                                    salekind.Add("sales_kind", s);
+                                    decimal isk = new SalesKind().Insert(salekind);
+                                }
+                            }
+                        }
+                    }
+                }
+                /*담당자정보가 있는지여부 체크*/
+                if (data["user_list"] != null && data["user_list"].ToString() != "")
+                {
+                    List<Hashtable> user_list = JsonConvert.DeserializeObject<List<Hashtable>>(data["user_list"].ToString());
+                    foreach (var item in user_list)
+                    {
+                        /*정산서 RAW 데이터 처리*/
+                        if (item.ContainsKey("sp_corp_no"))
+                        {
+                            item["sp_corp_no"] = data["sp_corp_no"].ToString();
+                        }
+                        else
+                        {
+                            item.Add("sp_corp_no", data["sp_corp_no"].ToString());
+                        }
+
+                        if (!item.ContainsKey("sp_corp_manager_no"))
+                        {
+                            item.Add("sp_corp_manager_no", "0");
+                        }
+                        Decimal iid = 0;
+                        if (item["sp_corp_manager_no"] == null
+                            || item["sp_corp_manager_no"].ToString() == ""
+                            || item["sp_corp_manager_no"].ToString() == "0")
+                        {
+                            iid = new SpCorpManager().Insert(item);
+                        }
+                        else
+                        {
+                            iid = new SpCorpManager().Update(item);
+                        }
+                    }
+                }
+
+                result.Success = true;
+                result.NewID = id;
+            }
+            catch (Exception ex)
+            {
+                if (Response.StatusCode == 200) Response.StatusCode = 500;
+
+                result.Success = false;
+                result.Errors.Add(new Error("EX", ex.ToString()));
+            }
+
+            return result;
+        }
+
+
+        [HttpGet]
+        //[Authorize]
+        [ActionName("ExcelDownload")]
+        public IActionResult ExcelDownload(string condition)
+        {
+            //CheckAuthNLogging(value);
+            var hsCondition = new Hashtable();
+            if (!string.IsNullOrWhiteSpace(condition))
+            {
+                hsCondition = JsonConvert.DeserializeObject<Hashtable>(condition);
+            }
+            List<Hashtable> excelcolumns = new List<Hashtable>();
+            if (hsCondition["excelcolumns"] != null && DBUtils.DataToString(hsCondition["excelcolumns"]) != "")
+            {
+                excelcolumns = JsonConvert.DeserializeObject<List<Hashtable>>(hsCondition["excelcolumns"].ToString());
+            }
+
+            hsCondition.Add("ordby", " ORDER BY 1 DESC");
+            /*페이지관련 정보 처리부분*/
+            hsCondition.Add("page", 1);
+            hsCondition.Add("start", 0);
+            hsCondition.Add("limit", 0);
+            hsCondition.Add("list_type", "EXCEL");
+
+            SpCorp.GetList(hsCondition, ref result);
+            List<Hashtable> list = (List<Hashtable>)result.Data;
+            DateTime now = DateTime.Now;
+            string this_date = now.ToString("yyyyMMddTHHmmssfff");
+
+            var fileDownloadName = "data.xlsx";
+            var reportsFolder = "reports";
+
+            if (hsCondition["excelname"] != null && DBUtils.DataToString(hsCondition["excelname"]) != "")
+            {
+                fileDownloadName = hsCondition["excelname"] + "_" + this_date + ".xlsx";
+            }
+            else
+            {
+                fileDownloadName = "RAWDATA_" + this_date + ".xlsx";
+            }
+
+            ExcelMakeEntity excelMakeEntity = new ExcelMakeEntity();
+
+            using (var package = excelMakeEntity.createExcelPackage(list, excelcolumns))
+            {
+                package.SaveAs(new FileInfo(Path.Combine(_hostingEnvironment.WebRootPath, reportsFolder, fileDownloadName)));
+            }
+            result.Success = true;
+
+            return File($"~/{reportsFolder}/{fileDownloadName}", XlsxContentType, fileDownloadName);
+
+        }
+    }
+}

@@ -1,0 +1,11 @@
+**/bin/
+**/obj/
+#.vscode/
+**/*.log
+**/.metadata/
+**/node_modules
+**/Upload/
+**/build/
+**/Publish/
+**/Logs/
+Publish/

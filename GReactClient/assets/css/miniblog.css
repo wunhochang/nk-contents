@@ -1,0 +1,53 @@
+.slimScrollDiv-style{
+  position: relative;
+  overflow: hidden;
+  width: auto; height: 240px;
+}
+.slimscroll-style{
+  overflow: hidden;
+  width: auto;
+  height: 240px;
+}
+
+.slimScrollDiv-style{
+  position: relative;
+  overflow: hidden;
+  width: auto;
+  height: 860px;
+}
+
+.slimscroll-menu-style{
+  overflow: hidden;
+  width: auto;
+  height: 860px;
+}
+
+.height-0-style{
+  height: 0px;
+}
+
+.slimScrollBar-style{
+  background: rgb(158, 165, 171);
+  width: 5px;
+  position: absolute;
+  top: 0px;
+  opacity: 0.4;
+  display: none;
+  border-radius: 7px;
+  z-index: 99;
+  right: 1px;
+  height: 805.664px;
+}
+
+.slimScrollRail-style{
+  width: 5px;
+  height: 100%;
+  position: absolute;
+  top: 0px;
+  display: none;
+  border-radius: 7px;
+  background: rgb(51, 51, 51);
+  opacity: 0.2;
+  z-index: 90;
+  right: 1px;
+}

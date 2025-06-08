@@ -1,0 +1,17 @@
+{
+  "name": "gapi",
+  "version": "1.0.0",
+  "description": "사용방법",
+  "main": "index.js",
+  "scripts": {
+    "start": "run-script-os",
+    "start:win32": "cross-env ASPNETCORE_ENVIRONMENT=Development dotnet watch run",
+    "start:darwin:linux": "TERM=xterm-color; cross-env ASPNETCORE_ENVIRONMENT=Development dotnet watch run"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "cross-env": "^7.0.3",
+    "run-script-os": "^1.1.6"
+  }
+}

@@ -1,0 +1,80 @@
+/*Ext Left Menu Theme*/
+/*배경색*/
+
+.x-treelist-nav{background-color:#515151;background-image:url('/assets/images/left_menu_bg.png');background-position-x:24px;padding:0 0 0 0; z-index:10000}
+
+.x-treelist-nav .x-treelist-toolstrip{background-color:#373737; z-index:10000}
+.x-treelist-nav .x-treelist-item-selected.x-treelist-item-tool{color:#f0f0f0;background-color:#ED1C22; z-index:10000}
+.x-treelist-nav .x-treelist-item-selected > .x-treelist-row{background-color:#373737; z-index:10000}
+.x-treelist-nav .x-treelist-item-tool{padding-left:10px;padding-right:10px; z-index:10000}
+.x-treelist-nav .x-treelist-item-tool-floated:after{height:36px;position:absolute;top:0;left:0;content:" ";width:4px;background-color:#ED1C22; z-index:10000}
+.x-treelist-nav .x-treelist-item-icon,.x-treelist-nav .x-treelist-item-tool,.x-treelist-nav .x-treelist-item-expander{line-height:36px;text-align:center; z-index:10000}
+.x-treelist-nav .x-treelist-item-icon,.x-treelist-nav .x-treelist-item-tool{color:#F1F4F9;font-size:18px;width:24px; z-index:10000}
+.x-treelist-nav .x-treelist-item-tool{width:44px; z-index:10000}
+/*좌측네비우측버튼 css*/
+.x-treelist-nav .x-treelist-item-expander{color:#F1F4F9;font-size:16px;width:24px;padding-top:0px; z-index:10000}
+.x-treelist-nav .x-treelist-item-text{color:#F1F4F9;margin-left:30px;margin-right:24px;line-height:36px; z-index:10000}
+.x-treelist-nav .x-treelist-row{padding-left:10px;padding-right:10px; z-index:10000}
+
+/*메뉴 마우스 올리면, 앞에 나오는 red색상 설정부분*/
+.x-treelist-nav .x-treelist-row:hover:before,.x-treelist-nav .x-treelist-item-selected > .x-treelist-row:before{content:" ";position:absolute;display:block;left:0;top:0;width:6px;height:100%; z-index:10000}
+.x-treelist-nav .x-treelist-row:hover:before{background-color:#F9A037; z-index:10000}
+.x-treelist-nav .x-treelist-item-selected > .x-treelist-row:hover:before{background-color:#F9A037; z-index:10000;}
+.x-treelist-nav .x-treelist-item-selected > .x-treelist-row:before{background-color:#F9A037; z-index:10000};
+
+.x-treelist-nav .x-treelist-item-floated .x-treelist-container{width:auto; z-index:10000}
+.x-treelist-nav .x-treelist-item-floated > .x-treelist-row{background-color:#373737; z-index:10000}
+.x-treelist-nav .x-treelist-item-floated > .x-treelist-container{margin-left:-24px; z-index:10000}
+.x-big .x-treelist-nav .x-treelist-item-floated > .x-treelist-container{margin-left:0; z-index:10000}
+.x-treelist-nav .x-treelist-item-floated > * > * > .x-treelist-item-text{margin-left:0; z-index:10000}
+.x-treelist-nav .x-treelist-item-floated > * .x-treelist-row{padding-left:0; z-index:10000}
+.x-treelist-nav .x-treelist-item-floated .x-treelist-row:before{width:0; z-index:10000}
+.x-treelist-nav .x-treelist-item-floated > .x-treelist-row:hover{background-color:#373737; z-index:10000}
+.x-treelist-nav .x-treelist-item-floated > .x-treelist-row:hover > * > .x-treelist-item-text{color:#F1F4F9; z-index:10000}
+.x-treelist-nav .x-treelist-item-expanded{background-color:#444444; z-index:10000}
+.x-treelist-nav.x-treelist-highlight-path .x-treelist-item:hover > * > .x-treelist-item-icon{color:#fff;transition:color 0.5s; z-index:10000}
+.x-treelist-nav.x-treelist-highlight-path .x-treelist-item:hover > * > .x-treelist-item-text{color:#fff;transition:color 0.5s; z-index:10000}
+.x-treelist-nav.x-treelist-highlight-path .x-treelist-item:hover > * > .x-treelist-item-expander{color:#fff;transition:color 0.5s; z-index:10000}
+
+/*클릭시 메뉴 배경색상설정*/
+.x-treelist-nav .x-treelist-row:hover{background-color:#373737; z-index:10000}
+.x-treelist-nav .x-treelist-row:hover > * > .x-treelist-item-icon{color:#fff;transition:color 0.5s; z-index:10000}
+.x-treelist-nav .x-treelist-row:hover > * > .x-treelist-item-text{color:#fff;transition:color 0.5s; z-index:10000}
+.x-treelist-nav .x-treelist-row:hover > * > .x-treelist-item-expander{color:#fff;transition:color 0.5s; z-index:10000}
+.x-treelist-nav .x-treelist-expander-first .x-treelist-item-icon{left:24px; z-index:10000}
+.x-treelist-nav .x-treelist-expander-first .x-treelist-item-text{margin-left:54px;margin-right:0; z-index:10000}
+.x-treelist-nav .x-treelist-expander-first .x-treelist-item-hide-icon > * > * > .x-treelist-item-text{margin-left:30px; z-index:10000}
+
+/*배경색*/
+.x-treelist-nav .x-treelist-item-hide-icon > * > * > .x-treelist-item-text{margin-left:6px; z-index:10000}.treelist-with-nav .x-panel-body{background-color:#515151; z-index:10000}.binding-selection-view .x-item-selected{color:#404040;background-color:#ffefbb; z-index:10000}
+
+.x-treelist-nav .x-treelist-item-expanded_1{background-color:#046181}
+
+.x-treelist-nav .x-treelist-item-expanded_2{background-color:#046181;background-image:url('/ksm/Resources/images/left_menu_bg.png');background-position-x:24px;padding:0 0 0 0; z-index:10000}
+
+/*tab panel 색상 css*/
+.x-tab-bar-default{
+	/*background-color:#4783AE;*/
+	background-color:#5EB2E2;
+}
+
+/*�׸��� �������� ���� preview height:10 ����ó�� css*/
+/*.x-grid-rowbody-tr {
+    display:none;
+}*/
+
+/*
+.top-user-name {
+    padding: 0 4px;
+    color: #4b4c4c;
+    font: 300 13px/16px 'Open Sans', 'Helvetica Neue', helvetica, arial, verdana, sans-serif;
+    font-weight: bold;
+		text-align: center;
+}
+*/
+.top-user-name {
+		padding: 0 4px;
+    color: #ffffff;
+    font: 300 13px/16px 'Open Sans', 'Helvetica Neue', helvetica, arial, verdana, sans-serif;
+		text-align: center;
+}

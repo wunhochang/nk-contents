@@ -1,0 +1,42 @@
+﻿.file-uploads-image-download{
+		width:19px!important; height:20px!important;
+    background-image: url('/assets/images/btn_download.png') !important;
+    background-color: transparent ;
+    border: none;
+    border-color: transparent ;
+    text-align: left;
+}
+.file-uploads-image-delete{
+		width:19px!important; height:20px!important;
+    background-image: url('/assets/images/btn_delete.png') !important;
+    background-color: transparent ;
+    border: none;
+    border-color: transparent ;
+    text-align: left;
+}
+
+.base-button-round{
+  font-size: 14px;
+  background-color: #4783AE;
+  border-color: #4783AE;
+  padding: 5px 7px 4px 7px;
+  border-radius: 4px 4px 4px 4px;
+}
+
+
+/*.x-btn-inner {
+	 color:#FFFFFF !important;
+
+	 font-family: Georgia;
+	 font-size: large;
+	 font-weight: bold;
+
+}*/
+
+/*.x-btn-pressed .base-button-round {
+	font-size: 14px;
+  background-color: #4783AE;
+  border-color: #4783AE;
+  padding: 5px 7px 4px 7px;
+  border-radius: 4px 4px 4px 4px;
+}*/

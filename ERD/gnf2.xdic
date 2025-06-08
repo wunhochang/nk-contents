@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<tm:TermDictionary xmlns:tm="http://exerd.com/term-model" version="1.1">
+  <term name="사용자" physicalName="user"/>
+  <term name="정보" physicalName="info">
+    <physicalSynonyms>information</physicalSynonyms>
+  </term>
+  <term name="번호" physicalName="no">
+    <physicalSynonyms>number</physicalSynonyms>
+  </term>
+  <term name="아이디" physicalName="id"/>
+  <term name="이름" physicalName="name"/>
+  <term name="부서" physicalName="dept">
+    <physicalSynonyms>depart</physicalSynonyms>
+  </term>
+  <term name="코드" physicalName="code"/>
+  <term name="비밀번호" physicalName="pwd">
+    <physicalSynonyms>passwd</physicalSynonyms>
+    <physicalSynonyms>password</physicalSynonyms>
+  </term>
+  <term name="역할" physicalName="role"/>
+  <term name="여부" physicalName="yn"/>
+  <term name="전화" physicalName="tel">
+    <physicalSynonyms>telephone</physicalSynonyms>
+  </term>
+  <term name="이메일" physicalName="email"/>
+  <term name="직위" physicalName="position"/>
+  <term name="사용" physicalName="use"/>
+  <term name="관리자" physicalName="manager">
+    <physicalSynonyms>admin</physicalSynonyms>
+  </term>
+  <term name="노출" physicalName="output">
+    <physicalSynonyms>display</physicalSynonyms>
+  </term>
+  <term name="순서" physicalName="order"/>
+  <term name="삭제" physicalName="del">
+    <physicalSynonyms>delete</physicalSynonyms>
+  </term>
+  <term name="타입" physicalName="type"/>
+  <term name="주소" physicalName="addr">
+    <physicalSynonyms>address</physicalSynonyms>
+  </term>
+  <term name="상위" physicalName="parent">
+    <synonyms>부모</synonyms>
+  </term>
+  <term name="업체" physicalName="vendor"/>
+  <term name="메뉴" physicalName="menu"/>
+  <term name="권한" physicalName="auth">
+    <physicalSynonyms>authorize</physicalSynonyms>
+  </term>
+  <term name="컨트롤러" physicalName="cntlr">
+    <physicalSynonyms>controller</physicalSynonyms>
+  </term>
+  <term name="액션" physicalName="action"/>
+  <term name="입력" physicalName="insert">
+    <physicalSynonyms>add</physicalSynonyms>
+  </term>
+  <term name="수정" physicalName="update">
+    <physicalSynonyms>modify</physicalSynonyms>
+  </term>
+  <term name="일" physicalName="date"/>
+  <term name="일시" physicalName="datetime"/>
+  <term name="이력" physicalName="hist">
+    <physicalSynonyms>history</physicalSynonyms>
+  </term>
+  <term name="로그인" physicalName="login"/>
+  <term name="클라이언트" physicalName="client"/>
+  <term name="토큰" physicalName="token"/>
+  <term name="파라메터" physicalName="param"/>
+  <term name="공용" physicalName="common"/>
+  <term name="데이터" physicalName="data"/>
+  <term name="비고" physicalName="remark"/>
+  <term name="결과" physicalName="result"/>
+  <term name="깊이" physicalName="depth"/>
+  <term name="경로" physicalName="path"/>
+  <term name="파일" physicalName="filee"/>
+  <term name="경로" physicalName="path"/>
+  <term name="크기" physicalName="size"/>
+  <term name="내용" physicalName="content"/>
+  <term name="메타" physicalName="meta"/>
+  <term name="정보" physicalName="info"/>
+  <term name="썸네일" physicalName="thumbnail"/>
+  <term name="업로드" physicalName="upload"/>
+  <term name="폴더" physicalName="folder"/>
+  <term name="참조" physicalName="ref"/>
+  <term name="임시" physicalName="temp"/>
+  <term name="저장" physicalName="save"/>
+  <term name="키" physicalName="key"/>
+</tm:TermDictionary>

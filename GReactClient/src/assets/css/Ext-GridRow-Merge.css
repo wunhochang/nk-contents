@@ -1,0 +1,36 @@
+
+        .grid-row-span .x-grid-item-alt { background-color: #ffffff; }
+        .grid-row-span .x-grid-item-alt:hover { background-color: #EAEFF4; }
+        .grid-row-span .x-grid-row {
+            border-bottom: 0;
+        }
+        .grid-row-span .x-grid-col {
+            border-bottom: 1px solid #ededed;
+        }
+        .grid-row-span .row-span {
+            border-bottom: 1px solid #ffffff;
+        }
+        .grid-row-span .row-span-first {
+            position: relative;
+        }
+        .grid-row-span .row-span-first .x-grid-cell-inner {
+            position: absolute;
+            width: 100%;
+        }
+        .grid-row-span .row-span-last {
+            border-bottom: 1px solid #ededed;
+        }
+
+        /*Grid Cell Item Click Blue Box 세팅 css*/
+        .x-grid-item-focused .x-grid-cell-inner:before {
+            content: "";
+            position: absolute;
+            z-index: -1;
+            top: 0px;
+            right: 0px;
+            bottom: 0px;
+            left: 0px;
+            pointer-events: none;
+            /*background-color: #F5F5F5; 색상변경*/
+            border: 0px solid #3d92cf;
+        }

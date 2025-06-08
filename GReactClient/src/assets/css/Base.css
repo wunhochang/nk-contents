@@ -1,0 +1,69 @@
+@charset "utf-8";
+
+/* reset */
+html, body {height:100%;}
+html, body, div, form, input, select, button, textarea, legend, fieldset, h1, h2, h3, h4, h5, h6, ul, ol, dl, li, dt, dd, blockquote, address, p, th, td, caption {margin:0; padding:0;}
+body, input, textarea, select, button, table, a {font-family:'Malgun Gothic','맑은고딕','Apple Gothic','애플고딕', '돋움', Dotum, Helvetica, sans-serif; font-size:13px; color: #141823; line-height:1.3em; letter-spacing:-.7px;}
+img, fieldset {border:0 none;}
+ul, ol, li {list-style:none;}
+em,address {font-style:normal;}
+a:link, a:hover,a:active,a:focus, a:visited {text-decoration:none; outline: 0;}
+table {text-align:center; border-collapse:collapse; border-spacing:0;}
+hr {display:none;}
+input[type=text], input[type=password], input[type=submit], input[type=search], textarea {-webkit-appearance:none; -webkit-border-radius:0; border: 0;}
+input, select, textarea {vertical-align:middle; resize:none;}
+button {border:0 none; background:transparent; cursor:pointer;}
+img {vertical-align:top;}
+
+/* common */
+.ir_pm {display:block; overflow:hidden; font-size:0px; line-height:0; text-indent:-9999px} /* 사용된 이미지내 의미있는 텍스트의 대체텍스트를 제공할때 */
+.ir_wa {position:relative; z-index:-10; display:block; overflow:hidden;width:100%; height:100%} /* 중요한 이미지 대체텍스트로 이미지off시에도 대체 텍스트를 보여주고자 할때 */
+.screen_out {position:absolute; overflow:hidden; width:0; height:0; line-height:0; text-indent:-9999px} /* 대체텍스트가 아닌 접근성을 위한 숨김텍스트를 제공할때 */
+caption, legend, .blind {display:block; overflow:hidden; position:absolute; top:-1000em; left:0; font-size:0; line-height:0;}
+.skipnav {position:absolute; top:-40px; left:0; z-index:10001; width:200px; height:24px; padding-top:4px; background-color:#000; font-size:16px; font-weight:bold; line-height:1.2em; color:#fff; text-align:center;}
+a.skipnav:active, a.skipnav:focus {top:0;}
+.clearfix:after {content:"";display:block; clear:both;}
+* {box-sizing:border-box; -webkit-box-sizing:border-box; -moz-box-sizing:border-box; -o-box-sizing:border-box;}
+*:hover {transition:all .2s; -webkit-transition:all .2s; -moz-transition:all .2s; -o-transition:all .2s;}
+.slick-track,
+.slick-track:hover,
+.slick-slide,
+.slick-slide:hover,
+.slick-slide img,
+.slick-slide img:hover{transition:none; -webkit-transition:none; -moz-transition:none; -o-transition:none;}
+
+/* table_ */
+.tbl_row {width:100%;}
+.tbl_row tbody {border-top: 1px solid #454d5b; text-align: left;}
+.tbl_row tbody tr {border-bottom:1px solid #d9d9d9;}
+.tbl_row tbody tr:last-child {border-bottom:1px solid #a5a6a8;}
+.tbl_row .textbox {width:100%; height:40px; border:none; background-color: #fbfbfb; color:#454d5b; padding:13px; }
+.contarea {width:100%;border:none; background-color: #fbfbfb; color:#454d5b; padding:13px; }
+.tbl_row th,
+.tbl_row td {padding: 15px; text-align: left;}
+.tbl_row th {background: #f5fafb;}
+.tbl_row .btn_file{display:inline-block; width:100px; height:38px; border:1px solid #9da5b5; text-align: center; line-height:35px; font-weight:700;}
+.tbl_row .textbox_2 {width:40%; height:40px; border:none; background-color: #fbfbfb; color:#454d5b; padding:13px;}
+.tbl_row p{width:50%; display: inline-block; margin-left:17px; color:#93a0af;font-size: 13px;}
+
+/*btn_foot*/
+.btn_wrap{width:100%; text-align: center; margin-top:30px;}
+.btn_cancle{display:inline-block; width:150px; height:45px; background-color:#454d5b; text-align: center; line-height:45px; color:#fff;}
+.btn_save{display:inline-block; width:150px; height:45px; background-color:#0561aa; text-align: center; line-height:45px; color:#fff;}
+.btn_list{display: inline-block; width: 150px; height: 45px; background-color: #454d5b; text-align: center; line-height: 45px; color: #fff;}
+
+
+
+.dangerous_imagemap {position:relative; background:url(/assets/images/img_bg.jpg); width: 864px; height: 395px;}
+.dangerous_imagemap .map {position:relative;}
+.dangerous_imagemap .map.map0{cursor:pointer; top:175px;left:103px;width:41px;height:48px;}
+.dangerous_imagemap .map.map1{cursor:pointer; top:221px;left:72px;width:39px;height:52px}
+.dangerous_imagemap .map p {margin:0; font-size: 13px;}
+.btn_download {margin-top: 10px; display: block; width: 100px; height: 20px; border-radius: 4px; text-align: center;line-height: 20px; font-size: 11px; border: 1px solid #d2d2d2; background: #f9f9f9; color: #3b3b3b;}
+.inner {position: absolute; top: -107px; left: -47px; padding: 10px 15px; display:none; background: #fff; border: 1px solid rgb(69, 77, 91);width: 140px; height: 90px; box-shadow: 1px 1px 3px 2px rgba(0, 0, 0, 0.26);border-radius: 6px;}
+.inner .inner_point{margin: 0px; padding: 0px; width: 0px; height: 0px; position: absolute; border-width: 17px 6px 0px; border-style: solid; border-color: rgb(69, 77, 91) transparent transparent; border-image: initial; pointer-events: none; box-sizing: content-box !important; bottom: -18px; left: 59px;}
+.inner .inner_point i {margin: 0px;padding: 0px;width: 0px;height: 0px;position: absolute;border-width: 16px 6px 0px;border-style: solid;border-color: rgb(255, 255, 255) transparent transparent;border-image: initial;pointer-events: none;box-sizing: content-box !important;bottom: 3px;left: -6px;}
+
+.xpto .x-form-trigger-wrap-default {border: none;}
+
+.xphidden .x-form-trigger-wrap-default {visibility:hidden}
