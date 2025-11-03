@@ -107,7 +107,7 @@ namespace GAPI.Entity
             worksheet2.Cells[5, 2].Value = sender == null ? "" : sender;
             worksheet2.Row(5).Height = 20;
 
-            var counter = "■ 정산담당자: 김보경";
+            var counter = "■ 정산담당자: 강서현";
             worksheet2.Cells["B6:F6"].Merge = true;
             worksheet2.Cells[6, 2].Value = counter == null ? "" : counter;
             worksheet2.Row(6).Height = 20;
@@ -888,7 +888,7 @@ namespace GAPI.Entity
             worksheet2.Cells[5, 2].Value = sender == null ? "" : sender;
             worksheet2.Row(5).Height = 20;
 
-            var counter = "■ 정산담당자: 김보경";
+            var counter = "■ 정산담당자: 강서현";
             worksheet2.Cells["B6:F6"].Merge = true;
             worksheet2.Cells[6, 2].Value = counter == null ? "" : counter;
             worksheet2.Row(6).Height = 20;
@@ -1284,7 +1284,7 @@ namespace GAPI.Entity
             worksheet2.Cells[5, 2].Value = sender == null ? "" : sender;
             worksheet2.Row(5).Height = 20;
 
-            var counter = "■ 정산담당자: 김보경";
+            var counter = "■ 정산담당자: 강서현";
             worksheet2.Cells["B6:F6"].Merge = true;
             worksheet2.Cells[6, 2].Value = counter == null ? "" : counter;
             worksheet2.Row(6).Height = 20;
