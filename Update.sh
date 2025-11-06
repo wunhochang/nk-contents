@@ -6,7 +6,7 @@ current_dir=$(dirname "$0")
 
 . "$current_dir/color.inc"
 
-GIT_REPO=git.gen-one.com/genone/etc/nk-contents
+GIT_REPO=github.com/wunhochang/nk-contents
 
 # Check input arguments
 #GIT_USERNAME=${1?"Usage: $0 git_username git_password"}
